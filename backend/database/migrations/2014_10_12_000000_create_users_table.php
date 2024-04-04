@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('photo')->default('/gallery/default-avatar.png');
             $table->string('role')->default('user');
             $table->string('country')->nullable();
+            $table->string('sex')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -26,8 +26,8 @@ class NewUserRequest extends FormRequest
         return [
             //
             'name' => ['required', 'string'],
-            'username' => ['required', 'string', ],
-            'email' => ['required', 'string', 'email', 'max:255'],
+            'username' => ['required', 'string','unique:users' ],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Password::defaults()]
         ];
     }

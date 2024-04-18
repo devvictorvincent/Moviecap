@@ -27,18 +27,19 @@ class ReviewController extends Controller
     }
     public function new(NewReview $request){
         //adding a new review
-
+        $user = Auth::user();
         $request->validated($request->all());
 
+        $movie = Movie::find($request->movie_id);
         $review = Review::create([
-                'movie-id' => $request->movie_id,
+                'movie_id' => $request->movie_id,
                 'rating' => $request->rating,
-                'comment' => $request->rating,
+                'comment' => $request->comment,
                 'user_id' => $user->id
         ]);
 
         //update movie stats
-        $movie = Movie::findorFail($request->movie_id);
+        
         $movie->rating = $movie->rating+$request->rating;
         $movie->no_of_ratings = $movie->no_of_ratings+1;
 

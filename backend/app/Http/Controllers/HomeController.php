@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Traits\HttpResponse;
 use App\Models\Movie;
 use App\Models\Slider   ;
+use Storage;
 class HomeController extends Controller
 {
     //
@@ -20,8 +21,8 @@ class HomeController extends Controller
     
     
     public function TopMovies(){
-        $top_movies= Movie::orderBy('rating', 'DESC')->paginate(10);
-
+        $top_movies= Movie::orderBy('rating', 'DESC')->paginate(5);
+        
         return $this->success($top_movies);
     } 
     

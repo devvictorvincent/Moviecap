@@ -13,7 +13,7 @@ class NewReview extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,8 +25,8 @@ class NewReview extends FormRequest
     {
         return [
             //
-            'movie_id' => ['required', 'unsignedBigInteger'],
-            'rating' => ['required', 'decimal']
+            'movie_id' => ['required'],
+            'rating' => ['required']
         ];
     }
 }

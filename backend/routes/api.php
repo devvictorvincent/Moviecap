@@ -37,6 +37,10 @@ Route::get('/movies/top', [HomeController::class, 'TopMovies']);
 Route::get('/movies/trending', [HomeController::class, 'TrendingMovies']);
 Route::get('/slider/{name}', [HomeController::class, 'Slider']);
 Route::get('/movie/{id}', [MovieController::class, 'Movie']);
+Route::get('/related_movies/{id}', [MovieController::class, 'related_movies']);
+
+Route::get('/categories', [MovieController::class, 'categories']);
+Route::post('/search', [MovieController::class, 'search']);
 
 
 

@@ -11,4 +11,11 @@ class Review extends Model
     public function movie(){
         return $this->belongsTo(Movie::class);
     }
+
+    protected $fillable =[
+        'movie_id',
+        'comment',
+        'rating',
+        'user_id'
+    ];
 }

@@ -16,7 +16,7 @@ class MovieController extends Controller
 
     public function movies(){
         $movies = Movie::orderBy('created_at', 'DESC')->get();
-
+       
         return $this->success($movies);
         
     }
@@ -34,15 +34,15 @@ class MovieController extends Controller
          if($request->trailer_link){
              $trailer_file=$request->file('trailer_link');
              $trailer_link = $trailer_file->getClientOriginalName();
-             $triler_path = $trailer_file->store('gallery', 'public');
-             $movie->trailer_link = $trailer_link;
-         }
+             $triler_path = $trailer_file->store('gallery','public');
+             $movie->trailer_link =$triler_path;
+         } 
          
          if($request->photo){
              $photo_file=$request->file('photo');
              $photo = $photo_file->getClientOriginalName();
              $photo_path = $photo_file->store('gallery', 'public');
-             $movie->photo = $photo;
+             $movie->photo = $photo_path;
          }
          $movie->save();
 
@@ -72,6 +72,22 @@ class MovieController extends Controller
         }
 
         $movie->update($request->all());
+
+        if($request->trailer_link){
+            $trailer_file=$request->file('trailer_link');
+            $trailer_link = $trailer_file->getClientOriginalName();
+            $triler_path = $trailer_file->store('gallery', 'public');
+            $movie->trailer_link =$triler_path;
+        } 
+        
+        if($request->photo){
+            $photo_file=$request->file('photo');
+            $photo = $photo_file->getClientOriginalName();
+            $photo_path = $photo_file->store('gallery','public');
+            $movie->photo = $photo_path;
+        }
+        $movie->save();
+
         return $this->success($movie, 'Movie updated Succesfully');
 
 

@@ -1,19 +1,19 @@
-import Footer from "./Footer"
-import Header from "./Home-components"
-import MovieCard from "./moviecard"
-import Screen from "./Screen"
+import Footer from "../Home/Footer";
+ import Header from "../Home/Home-components"
+import MovieCard from "../Home/moviecard" 
 import {Helmet} from "react-helmet";
+import MovieScreen from "../Home/Movie-screen";
+import PopularMovies from "../Home/popularMovies";
+import RateCard from "../Components/RateCard";
 import { useEffect, useState } from "react";
-import Skeleton from "./Skeleton";
-import { Link } from "react-router-dom"
-import PopularMovies from "./popularMovies";
- 
+import Skeleton from "../Home/Skeleton";
 
-function Home(){
-    
-    const token = localStorage.getItem('token');
-     
-    const [topMovies, setTopMovies] =useState(null);
+function Ratings(){
+
+
+
+    const token = localStorage.getItem('token')
+    const [myRatings, setmyRatings] =useState(null);
      
     
     const rheaders ={
@@ -24,11 +24,11 @@ function Home(){
 
       useEffect(() => {
         // Function to fetch user data from the API
-        const fetchUserData = async () => {
+        const fetchData = async () => {
           try {
             // Make API request using fetch or Axios
-            const response = await fetch('http://localhost:8000/api/movies/top',{
-              method: 'GET',
+            const response = await fetch('http://localhost:8000/api/reviews',{
+              method: 'POST',
               headers: rheaders,
             });
             
@@ -38,16 +38,16 @@ function Home(){
     
             // Parse JSON response and update user data state
             const data = await response.json();
-            setTopMovies(data.data.data);
-            console.log(topMovies);
+            setmyRatings(data.data);
+            console.log(myRatings);
           } catch (error) {
             // Handle fetch or JSON parsing errors here
             console.error('Error:', error);
           }
         };
     
-        // Call the fetchUserData function when the component mounts
-        fetchUserData();
+        // Call the fetchData function when the component mounts
+        fetchData();
     
         // Cleanup function (optional)
         return () => {
@@ -56,50 +56,43 @@ function Home(){
       }, []); // Empty dependency array ensures the effect runs once after the initial render
     
 
+   
     return (
-    
         <>
         <Helmet>
                 <meta charSet="utf-8" />
-                <title>Welcome to Moviecap - find interesting movies, rates and watch trailers</title>
+                <title>My Ratings - MovieCap</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
         <Header />
-        <Screen />
-
+       
+ 
         <section class="text-center">
             <div class="section-title text-center">
                 <div class="title">
-                    Top Movies
+                   My Ratings
                 </div>
             </div>
+            {myRatings == null ? <><Skeleton dataType={'myRatings'} no={10} />  </> : 
+        myRatings.map((item) =>{
+            return <RateCard 
+            review={item}  />
+        })}
             
-            {topMovies == null ? <><Skeleton dataType={'topMovies'} no={5} />  </> : 
-            topMovies.map((item) =>{
-                return <MovieCard 
-                movie={item} />
-            })}
-         
             </section>
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
-            <br />
+            
             <section class="text-center">
             <div class="section-title">
                 <div class="title">
-            Popular Movies
+            More Movies
                 </div>
             </div>
-            <PopularMovies />
+      <PopularMovies />
+     
             </section>
           <Footer />
         </>
     )
 }
 
-export default Home
+export default Ratings;

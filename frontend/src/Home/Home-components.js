@@ -46,7 +46,7 @@ export default function Header(){
                     Home
                 </div>
              <div class="item">
-                   Movies
+                  <Link to="/search"> Explore </Link>
                 </div> 
                 
                 <div class="item">

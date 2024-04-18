@@ -1,13 +1,22 @@
-export default function MovieCard(){
+import { Link } from "react-router-dom";
+import Rating from "../Components/Rating";
+
+export default function MovieCard({movie}){
     return (
         <card class="movie-card">
                    <img src="https://assetsio.reedpopcdn.com/avatar-netflix-release-date-header.png?width=1200&height=1200&fit=bounds&quality=70&format=jpg&auto=webp" alt="Movie Photo" />
                      <div class="title">
-                         Avatar The last Air Bender
+                         {movie.title}
+                         <Rating rating={movie.rating}  no_of_ratings={movie.no_of_ratings}/>
                      </div>
-                     <div class="text-2">
-                     The series is centered around the journey of twelve-year-old Aang, the current Avatar and last survivor of his nation, the Air Nomads, along with his friends
-                     <div><button>Watch Trailer</button> </div>
+                     <div class="text-2 sum-1">
+                    {movie.description}
+                    <br />
+                    <br />
+                     <div> <Link to="/movie" state={{id:movie.id}}>
+                         <button>Watch Trailer</button>
+                         </Link>
+                          </div>
                      </div>
         </card>
     )

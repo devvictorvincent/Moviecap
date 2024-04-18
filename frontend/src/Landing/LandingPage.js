@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 import PopularMovies from "./popularMovies";
  
 
-function Home(){
+function Landing(){
     
     const token = localStorage.getItem('token');
      
@@ -61,7 +61,7 @@ function Home(){
         <>
         <Helmet>
                 <meta charSet="utf-8" />
-                <title>Welcome to Moviecap - find interesting movies, rates and watch trailers</title>
+                <title>Welcome to Moviecap Home - find interesting movies, rates and watch trailers</title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
         <Header />
@@ -73,12 +73,7 @@ function Home(){
                     Top Movies
                 </div>
             </div>
-            
-            {topMovies == null ? <><Skeleton dataType={'topMovies'} no={5} />  </> : 
-            topMovies.map((item) =>{
-                return <MovieCard 
-                movie={item} />
-            })}
+           
          
             </section>
             <br />
@@ -95,11 +90,11 @@ function Home(){
             Popular Movies
                 </div>
             </div>
-            <PopularMovies />
+         
             </section>
           <Footer />
         </>
     )
 }
 
-export default Home
+export default Landing

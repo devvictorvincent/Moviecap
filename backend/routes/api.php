@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\Admin\MovieController as AdminMovieController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\SliderController as AdminSliderController;
@@ -46,6 +47,9 @@ Route::post('/search', [MovieController::class, 'search']);
 
 Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/reviews', [ReviewController::class, 'reviews']);
+    Route::post('/profile', [AccountController::class, 'index']);
+    Route::post('/profile/update', [AccountController::class, 'update']);
+    Route::post('/profile/logout', [AccountController::class, 'logout']);
     Route::post('/review/new', [ReviewController::class, 'new']);
 
     Route::post('/logout', [AuthController::class, 'logout']);

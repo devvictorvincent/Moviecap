@@ -28,6 +28,7 @@ class MovieController extends Controller
         $movie->ratings = Review::find($movie->id);
 
         $movie->category_data = Category::find($movie->category_id);
+        $movie->photo = asset('storage/gallery/' . $movie->photo);
 
         return $this->success($movie);
     } 

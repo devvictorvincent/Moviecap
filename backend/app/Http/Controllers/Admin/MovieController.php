@@ -35,14 +35,14 @@ class MovieController extends Controller
              $trailer_file=$request->file('trailer_link');
              $trailer_link = $trailer_file->getClientOriginalName();
              $triler_path = $trailer_file->store('gallery','public');
-             $movie->trailer_link =$triler_path;
+             $movie->trailer_link ='storage/'.$triler_path;
          } 
          
          if($request->photo){
              $photo_file=$request->file('photo');
              $photo = $photo_file->getClientOriginalName();
              $photo_path = $photo_file->store('gallery', 'public');
-             $movie->photo = $photo_path;
+             $movie->photo = 'storage/' . $photo_path;
          }
          $movie->save();
 
@@ -65,8 +65,8 @@ class MovieController extends Controller
     
     
     public function update(Request $request){
-            //return $request;
-        $movie = Movie::find(intval($request->id));
+            return $request;
+      return  $movie = Movie::find(intval($request->id));
         if($movie == null){
             return $this->error('', 'Movie Does not exist', 404);
         }
@@ -77,14 +77,15 @@ class MovieController extends Controller
             $trailer_file=$request->file('trailer_link');
             $trailer_link = $trailer_file->getClientOriginalName();
             $triler_path = $trailer_file->store('gallery', 'public');
-            $movie->trailer_link =$triler_path;
+            $movie->trailer_link ='storage/'.$triler_path;
         } 
         
         if($request->photo){
             $photo_file=$request->file('photo');
             $photo = $photo_file->getClientOriginalName();
-            $photo_path = $photo_file->store('gallery','public');
-            $movie->photo = $photo_path;
+           $photo_path = $photo_file->store('gallery','public');
+            
+            $movie->photo = 'storage/' .$photo_path;
         }
         $movie->save();
 

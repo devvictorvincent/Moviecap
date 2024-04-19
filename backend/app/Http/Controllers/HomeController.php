@@ -22,6 +22,9 @@ class HomeController extends Controller
     
     public function TopMovies(){
         $top_movies= Movie::orderBy('rating', 'DESC')->paginate(5);
+        foreach($top_movies as $movie){
+            $movie->photo = asset('storage/gallery/' . $movie->photo);
+        }
         
         return $this->success($top_movies);
     } 

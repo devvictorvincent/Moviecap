@@ -5,6 +5,8 @@ import './css/auth.css';
 import {Helmet} from 'react-helmet';
 
 function Login(){
+    
+    const baseUrl = process.env.REACT_APP_API_URL;
     const history = useNavigate();
     const [isLoading, setisLoading] =useState(false);
     const [error, setError] =useState(null);
@@ -23,7 +25,7 @@ function Login(){
     }
   async function pushData(data){
       try {
-          const response = await fetch('http://localhost:8000/api/login',
+          const response = await fetch(baseUrl+'/login',
          {
             
                 method: 'POST',
@@ -79,8 +81,10 @@ function Login(){
                 </title>
                 <link rel="canonical" href="http://mysite.com/example" />
             </Helmet>
-                <div class="auth-card">
-                    <card>
+            
+                <div class="auth-card card">
+                    <div>
+                    
                     <div class="section-title text-center">
                         <img src="/moviecap-white.png"  style={{width:'120px '}}/>
                     </div>
@@ -101,7 +105,7 @@ function Login(){
                    
                     <button class="w-full" type="button" style={{ opacity: validated ? 1 : 0.2 }} onClick={submit}>{isLoading ? 'connecting...' : 'Login'}</button>
                     <p>Don't have an account? <Link to="/register"> Create New One </Link></p>
-                    </card>
+                    </div>
                 </div>
         </div>
        

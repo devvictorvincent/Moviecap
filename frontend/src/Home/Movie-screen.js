@@ -6,7 +6,7 @@ import PopCard from './popcard';
 import Skeleton from './Skeleton';
 
 export default function MovieScreen({id, background}){
-    
+  const baseUrl = "http://localhost:8000/";
     const [pop, setPop] = useState(false);
     const popIt = () =>{
         setPop(!pop);
@@ -82,7 +82,7 @@ export default function MovieScreen({id, background}){
                   
                     <div class="left">
                      <video class="movie" controls muted autoPlay playsInline>
-                         <source src="/Avatar The Last Airbender Official Trailer Netflix.mp4" />
+                         <source src={baseUrl + movie.trailer_link} />
                      </video>
                      
                        

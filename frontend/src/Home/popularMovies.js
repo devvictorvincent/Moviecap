@@ -4,6 +4,9 @@ import MovieCard from "./moviecard";
  
 
 export default function PopularMovies(){
+  
+  const baseUrl = process.env.REACT_APP_API_URL;
+
     const token = localStorage.getItem('token')
     const [popularMovies, setpopularMovies] =useState(null);
      
@@ -19,7 +22,7 @@ export default function PopularMovies(){
         const fetchUserData = async () => {
           try {
             // Make API request using fetch or Axios
-            const response = await fetch('http://localhost:8000/api/movies/trending',{
+            const response = await fetch(baseUrl+'/movies/trending',{
               method: 'GET',
               headers: rheaders,
             });

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons';
 import Rate from '../Components/Rate';
 
-const PopCard = ({content: Content,  popup, ...props}) =>{
+const PopCard = ({title, content: Content,  popup, ...props}) =>{
  
     const pop  = () => {
         popup(!popup);
@@ -21,8 +21,12 @@ const PopCard = ({content: Content,  popup, ...props}) =>{
             <FontAwesomeIcon icon={faWindowClose} /></span>
 
                 <card>
+                    <div class="card-header">
+                    <h3>{title} </h3>
+
+                    </div>
                         <div className="card-body">
-                        <h1>Rate Movie </h1>
+                       
                 <div class="main"> 
                  <Content {...props} />
                    

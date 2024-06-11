@@ -11,6 +11,7 @@ import PopularMovies from "./popularMovies";
 
 function Home(){
     
+  const baseUrl = process.env.REACT_APP_API_URL;
     const token = localStorage.getItem('token');
      
     const [topMovies, setTopMovies] =useState(null);
@@ -27,7 +28,7 @@ function Home(){
         const fetchUserData = async () => {
           try {
             // Make API request using fetch or Axios
-            const response = await fetch('http://localhost:8000/api/movies/top',{
+            const response = await fetch(baseUrl+'/movies/top',{
               method: 'GET',
               headers: rheaders,
             });
@@ -39,7 +40,7 @@ function Home(){
             // Parse JSON response and update user data state
             const data = await response.json();
             setTopMovies(data.data.data);
-            console.log(topMovies);
+            console.log('movies is  '+ data.data.data);
           } catch (error) {
             // Handle fetch or JSON parsing errors here
             console.error('Error:', error);

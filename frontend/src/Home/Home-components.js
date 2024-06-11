@@ -3,7 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import PopUp from './popup';
 import { Link } from 'react-router-dom';
+import UserSnip from './userSnip';
 
+const token = localStorage.getItem("token");
 const navigation = (
     <nav>
       <div class="item">
@@ -15,13 +17,28 @@ const navigation = (
       <div class="item">
           <Link to="/about"> About Us </Link>
       </div>
-      <div class="item">
-          <Link to="/login"> Account </Link>
-          </div>
+      
+          {token  == null ?  <Link to="/login"> Account </Link> : 
+          <> 
+          <div class="item">
+          <Link to="/profile"> Profile </Link>
+       </div>
+       <div class="item">
+         <Link to="/ratings">  My Ratings </Link>
+       </div>
+       <div class="item">
+          <Link to="/logout"> Logout </Link>
+       </div>
+       </>
+       }
+
     </nav>
   );
   
+ 
+  
 export default function Header(){
+    const token = localStorage.getItem("token");
     const [popup, setPopup] = useState(false);
     const pop  = () => {
         setPopup(!popup);
@@ -43,7 +60,7 @@ export default function Header(){
 
             <nav class="flex flex-spaced-between g-10px destop-only">
                 <div class="item">
-                    Home
+                <Link to="/">    Home </Link>
                 </div>
              <div class="item">
                   <Link to="/search"> Explore </Link>
@@ -53,7 +70,8 @@ export default function Header(){
                     About Us
                 </div>
                  <div class="item">
-                   <Link to="/login"> Account </Link>
+                     {token  == null ?  <Link to="/login"> Account </Link> :  <UserSnip />}
+                
                 </div>
             </nav>
             <div class="mobile-tog mobile-only" onClick={() => pop()}> <FontAwesomeIcon icon={faBars} /></div>
@@ -61,7 +79,8 @@ export default function Header(){
     )
 }
 
-  
+
+
 
 
 

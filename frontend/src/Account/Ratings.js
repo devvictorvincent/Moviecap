@@ -10,6 +10,7 @@ import Skeleton from "../Home/Skeleton";
 
 function Ratings(){
 
+  const baseUrl = process.env.REACT_APP_API_URL;
 
 
     const token = localStorage.getItem('token')
@@ -27,7 +28,7 @@ function Ratings(){
         const fetchData = async () => {
           try {
             // Make API request using fetch or Axios
-            const response = await fetch('http://localhost:8000/api/reviews',{
+            const response = await fetch(baseUrl+'/reviews',{
               method: 'POST',
               headers: rheaders,
             });

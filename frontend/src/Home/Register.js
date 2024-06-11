@@ -5,6 +5,9 @@ import './css/auth.css';
 import {Helmet} from 'react-helmet';
 
 function Register(){
+    
+    const baseUrl = process.env.REACT_APP_API_URL;
+
     const history = useNavigate();
     const [isLoading, setisLoading] =useState(false);
     const [error, setError] =useState(null);
@@ -29,7 +32,7 @@ function Register(){
     }
   async function pushData(data){
       try {
-          const response = await fetch('http://localhost:8000/api/register',
+          const response = await fetch(baseUrl+'/api/register',
          {
             
                 method: 'POST',

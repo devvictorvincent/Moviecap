@@ -4,6 +4,9 @@ import MovieCard from "./moviecard";
  
 
 export default function RelatedMovies({id}){
+  
+  const baseUrl = process.env.REACT_APP_API_URL;
+
     const token = localStorage.getItem('token')
     const [relatedMovies, setrelatedMovies] =useState(null);
      
@@ -19,7 +22,7 @@ export default function RelatedMovies({id}){
         const fetchUserData = async () => {
           try {
             // Make API request using fetch or Axios
-            const response = await fetch('http://localhost:8000/api/related_movies/'+id,{
+            const response = await fetch(baseUrl+'/related_movies/'+id,{
               method: 'GET',
               headers: rheaders,
             });

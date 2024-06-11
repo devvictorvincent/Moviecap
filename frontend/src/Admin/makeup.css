@@ -1,0 +1,52 @@
+.sidebar{
+    height:100vh;
+    background-color: #0F1214;
+    position:fixed;
+    width:200px;
+    top:0;
+    padding-top:20px;
+}
+.sidebar .item{
+    padding:13px;
+}
+.sidebar a{
+    color:rgb(219, 212, 212);
+}
+.sidebar .item a.active{
+    color:rgb(114, 118, 150);
+}
+.fixed{
+    
+}
+.info-bar{
+    width:100%;
+    gap:30px;
+}
+.dash-body{
+    margin-left:200px;
+    padding:10px;
+   
+}
+.info-bar .card{
+    width: 300px;
+}
+.card{
+    background: #0F1214;
+    padding: 16px;
+    border-radius: 14px;
+    border:solid#000000 0.5px;
+}
+.w-full{
+    width:100%;
+}
+.admin-header{
+    margin-left:200px;
+}
+.box{
+    background: rgb(2, 4, 12);
+    border-radius: 10px;
+    width:100%;
+}
+tr {
+    border-radius: 20px !important;
+}

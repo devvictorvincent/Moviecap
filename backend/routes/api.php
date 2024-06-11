@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function (){
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::group(['prefix' => 'admin', 'middleware' => ['AdminGuard'], ], function(){
-            Route::post('/movies', [AdminMovieController::class, 'Movies']);
+            Route::get('/movies', [AdminMovieController::class, 'Movies']);
             Route::post('/movie/new', [AdminMovieController::class, 'new_movie']);
             Route::get('/movie/{id}', [AdminMovieController::class, 'movie']);
             Route::patch('/movie/update', [AdminMovieController::class, 'update']);

@@ -28,7 +28,7 @@ class AccountController extends Controller
         $user = Auth::user();
         if($user == null){
             return  $this->error('', 'User Not logged in', 403);
-        }
+        }           
         $user->update($request->all());
 
         return $this->success($user, 'User Updated Successfully');

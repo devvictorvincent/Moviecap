@@ -15,7 +15,7 @@ class MovieController extends Controller
     use HttpResponse;
 
     public function movies(){
-        $movies = Movie::orderBy('created_at', 'DESC')->get();
+        $movies = Movie::orderBy('created_at', 'DESC')->paginate(100);
        
         return $this->success($movies);
         

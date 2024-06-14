@@ -2,6 +2,8 @@ Moviecap
 Introduction
 
 Welcome to MovieCap! This web application allows users to rate and review movies, discover new films, and share their thoughts with others. Whether you're a casual moviegoer or a cinephile, our app provides a platform for you to express your opinions and find recommendations.
+You can find a deployed version at moviecap.victorvincent.tech.
+
 Features
 
     User Registration and Authentication: Users can create accounts, log in securely, and manage their profiles.
@@ -20,15 +22,23 @@ Features
 
     Notifications: Stay updated with notifications about new ratings, comments, and activity related to your account.
 
-
-    Technologies Used
-
-    Frontend: HTML, CSS, JavaScript, Vue.js (or your preferred frontend framework)
-
-    Backend: PHP (Laravel framework recommended), MySQL (or your preferred database system)
-
     Authentication: JWT (JSON Web Tokens), OAuth (for social media login)
 
     APIs: Integration with movie databases (e.g., IMDb API, The Movie Database API) for movie information
 
     Hosting: Deploy your application on a cloud platform like AWS, Azure, or Heroku for scalability and reliability.
+
+Installation Guide
+
+Kindly clone repo to start
+Proceed to run npm run on the frontend folder.
+
+go ahead to add an .env file inside the backend folder and edit your database credetials
+after that run php artisan migrate to migrate your databases.
+
+Usage:
+
+Run Npm start on the front end folder
+
+Run php artisan serve on the back end and ensure your connected database is runing smmothly
+

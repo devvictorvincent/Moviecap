@@ -28,7 +28,7 @@ const PopCard = ({title, content: Content,  popup, ...props}) =>{
                         <div className="card-body">
                        
                 <div class="main"> 
-                 <Content {...props} />
+              {Content}
                    
                     </div>
                     </div>

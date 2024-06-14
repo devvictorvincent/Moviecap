@@ -65,7 +65,7 @@ export default function MovieScreen({id, background}){
 
     return (
         <screen>
-           {pop ? <PopCard content={Rate} props={{  // Define props here
+           {pop ? <PopCard content={<Rate />} props={{  // Define props here
       movieId: id,
       anotherProp: 123,
     }} popup={setPop}/> : ''} 

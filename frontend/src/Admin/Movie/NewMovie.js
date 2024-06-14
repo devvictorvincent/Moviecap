@@ -1,9 +1,11 @@
 import { useState } from "react";
 import useFetch from "../../fetch"
 import Skeleton from "../../Home/Skeleton";
+import usePost from "../../push";
 
 export default function NewMovie (){
-    const [formData, setFormData] = useState({});
+  const formData = new FormData();
+  const [isLoading, setIsLoading] = useState();
   const [photo, setPhoto] = useState(null);
   const [trailerLink, setTrailerLink] = useState(null);
 
@@ -16,6 +18,7 @@ export default function NewMovie (){
             categories =output.data;
            // console.log('data is' + output.data.data)
      }
+
        const [movie, setMovie] =useState({
             title: '',
             description: '',
@@ -26,10 +29,7 @@ export default function NewMovie (){
         
        const handleInput = (e) => {
         const { name, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
+         formData.append(name, value);
        // console.log(formData);
       };
     
@@ -37,33 +37,28 @@ export default function NewMovie (){
     const handleFileChange = (e) => {
         const { name, files } = e.target;
         if (name === 'photo') {
-          setPhoto(files[0]);
+          formData.append('photo', files[0])
+          //setPhoto(files[0]);
         } else if (name === 'trailerLink') {
-          setTrailerLink(files[0]);
+          formData.append('trailer-link', files[0])
+       //   setTrailerLink(files[0]);
         }
 
-      //  console.log(trailerLink);
+        //console.log(formData);
       };
     
-      const handleSubmit = (e) => {
+      const handleSubmit = async (e) => {
         e.preventDefault();
-    
-        // Create FormData object and append fields
-        const formDataToSubmit = new FormData();
-        for (const key in formData) {
-          formDataToSubmit.append(key, formData[key]);
+        try {
+          const response = await usePost('/admin/movie/new', formData);
+
+          
+        } catch (error) {
+          
         }
-        if (photo) {
-            console.log('phoot added'+ photo);
-          formDataToSubmit.append('photo', photo);
-         
-        }
-        if (trailerLink) {
-          formDataToSubmit.append('trailer_link', trailerLink);
-        }
-    
+      
         //setSubmitted(true);
-        setFormData(formDataToSubmit);
+       // setFormData(formDataToSubmit);
         console.log(formData);
       };
     return(
@@ -77,6 +72,7 @@ export default function NewMovie (){
                  </div>
             
                  <div class="card-body">
+                   {error ? <div class="alert alert-danger"> {error} </div> : ''}
                      {!categories ? <Skeleton /> : (<div className="row">
                          
                          <div className="col-sm-5">
@@ -100,7 +96,9 @@ export default function NewMovie (){
                             <label>Photo</label>
                             <input type="file" onChange={handleFileChange} name="photo" />
                         </div>
-                         <button className="w-full"  onClick={handleSubmit}>Submit</button>
+                         <button className="w-full"  onClick={handleSubmit}>
+                           {isLoading ? 'Submiting......': 'Submit'}
+                           </button>
                           </div>)}
                      
 

@@ -7,10 +7,15 @@ import PopUp from "../../Home/popup";
 import Skeleton from "../../Home/Skeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile, faSave } from "@fortawesome/free-solid-svg-icons";
+import EditCategory from "./NewCategory";
 
 const baseUrl = process.env.REACT_APP_API_URL;
-const Categories = () => {
+const Categories = () => { 
     const [popup, setPopUp] = useState(false);
+    const [popData, setPopData] =useState({
+        title: 'Hello popup',
+        content: 'My hello pop content'
+    })
 
     let categories = [];
     const {output, error }= useFetch({endpoint: '/admin/categories'});
@@ -21,6 +26,21 @@ const Categories = () => {
   }
 
   const handleAddNew = ()=>{
+    setPopData(prevState => ({
+        ...prevState,
+        title: "Add Category",
+        content: <Category />
+    }));
+  setPopUp(!popup);
+  }
+  
+  const handleEdit = (id)=>{
+      console.log('id is: '+ id);
+        setPopData(prevState => ({
+            ...prevState,
+            title: "Edit Category",
+            content: <EditCategory id={id} />
+        }));
       setPopUp(!popup);
   }
     return (
@@ -29,7 +49,7 @@ const Categories = () => {
            
            <div class="card-header">
            
-         {popup ? <PopCard title="Add Category" content={Category} popup={setPopUp} /> : ''}  
+         {popup ? <PopCard title={popData.title} content={popData.content} popup={setPopUp} /> : ''}  
                Categories
               <div class="fright">
                    <button onClick={handleAddNew}>Add New</button>
@@ -54,7 +74,8 @@ const Categories = () => {
                                   <td> {item.description}  </td>
                                   <td>  {item.created_at}</td>
                                   <td> 
-                                     <Link to="/admin/movie/edit" state={{id:item.id}}> <button>Edit</button>  </Link>
+                                      <button onClick={()=>{
+                                          handleEdit(item.id)}}>Edit</button>  
                                      
                                       <button>Delete</button>
                                       </td>

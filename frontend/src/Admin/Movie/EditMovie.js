@@ -1,12 +1,23 @@
+import { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router";
 import useFetch from "../../fetch"
 import Skeleton from "../../Home/Skeleton";
 
 export default function EditMovie (){
+    const [formData, setFormData] = useState({});
     const params = useParams();
     const location = useLocation();
     const   state = location.state;
     const {id} = state;
+    const {output: cat, error: catError} = useFetch({endpoint: '/admin/categories'});
+    let categories = null;
+    if(catError){
+        alert(catError);
+    }
+     if(cat){
+            categories =cat.data;
+           // console.log('data is' + output.data.data)
+     }
  
     const navigate = useNavigate();
     if(!id){
@@ -23,7 +34,14 @@ export default function EditMovie (){
            // console.log('data is' + output.data.data)
      }
        
-        
+     const handleInput = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+       // console.log(formData);
+      };
     
 
     return(
@@ -44,7 +62,11 @@ export default function EditMovie (){
                             <input type="text" value={movie.title} name="title" placeholder="Title"></input>
 
                             <label>Category </label>
-                             
+                            <select name="category_id" onChange={handleInput}>
+                                    {categories.map((item) =>{
+                                        return <option value={item.id}> {item.title} </option>
+                                    })}
+                            </select>
                                 <label>Movie Description </label>
                             <textarea name="description" value={movie.description} placeholder="Description" style={{height:300}}></textarea>
                         </div>

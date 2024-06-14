@@ -38,6 +38,14 @@ div, section, p, input, select{
   color:rgb(108, 101, 101);
   font-size:13px;
 }
+@keyframes fade-in{
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 
 @keyframes App-logo-spin {
   from {
@@ -305,6 +313,10 @@ display:block;}
   top:0;
   z-index: 5000;
   left:0;
+  animation-name:fade-in;
+  animation-duration: 0.5s;
+  animation-iteration-count: 1;
+  animation-delay: 0ms;
 }
 .popcard .p-box{
   width:100%;
